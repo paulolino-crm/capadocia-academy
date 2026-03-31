@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Capadócia Academy — Alunos</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#003358",
+            "primary-fixed": "#d0e4ff",
+            "primary-container": "#004a7c",
+            "on-primary": "#ffffff",
+            "on-primary-fixed": "#001d35",
+            "on-primary-fixed-variant": "#00497b",
+            "secondary": "#006492",
+            "secondary-fixed": "#cae6ff",
+            "on-secondary": "#ffffff",
+            "on-secondary-fixed": "#001e2f",
+            "on-secondary-fixed-variant": "#004b6f",
+            "tertiary": "#432d16",
+            "tertiary-fixed": "#ffdcbe",
+            "tertiary-container": "#5b432b",
+            "on-tertiary": "#ffffff",
+            "on-tertiary-fixed": "#2a1704",
+            "on-tertiary-fixed-variant": "#5a422a",
+            "surface": "#f8f9fa",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#f3f4f5",
+            "surface-container": "#edeeef",
+            "surface-container-high": "#e7e8e9",
+            "surface-container-highest": "#e1e3e4",
+            "on-surface": "#191c1d",
+            "on-surface-variant": "#42474f",
+            "outline": "#727780",
+            "outline-variant": "#c1c7d0",
+            "error": "#ba1a1a",
+            "background": "#f8f9fa"
+          },
+          fontFamily: {
+            "headline": ["Epilogue", "sans-serif"],
+            "body": ["Manrope", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;
+      vertical-align: middle;
+    }
+    body { font-family: 'Manrope', sans-serif; }
+    h1, h2, h3 { font-family: 'Epilogue', sans-serif; }
+  </style>
+</head>
+<body class="bg-surface text-on-surface">
+
+<!-- Sidebar -->
+<aside class="h-screen w-64 fixed left-0 top-0 flex flex-col py-6
+              bg-slate-50 z-50">
+  <div class="px-6 mb-10 flex items-center gap-3">
+    <div class="w-10 h-10 rounded-xl bg-primary flex items-center
+                justify-center text-white">
+      <span class="material-symbols-outlined">palette</span>
+    </div>
+    <div>
+      <h1 class="font-headline font-bold text-blue-900 text-base leading-none">
+        Capadócia Academy
+      </h1>
+      <p class="text-xs text-slate-500 mt-1">Portal Admin</p>
+    </div>
+  </div>
+
+  <nav class="flex-1 px-4 space-y-2">
+    <a href="dashboard.html"
+       class="flex items-center gap-3 px-4 py-3 rounded-lg
+              text-slate-600 hover:bg-slate-200 transition-all">
+      <span class="material-symbols-outlined">dashboard</span>
+      <span>Dashboard</span>
+    </a>
+    <a href="alunos.html"
+       class="flex items-center gap-3 px-4 py-3 rounded-lg
+              text-blue-900 border-r-4 border-blue-900
+              bg-slate-200/50 transition-all">
+      <span class="material-symbols-outlined">group</span>
+      <span>Alunos</span>
+    </a>
+    <a href="financeiro.html"
+       class="flex items-center gap-3 px-4 py-3 rounded-lg
+              text-slate-600 hover:bg-slate-200 transition-all">
+      <span class="material-symbols-outlined">payments</span>
+      <span>Financeiro</span>
+    </a>
+    <a href="nova-matricula.html"
+       class="flex items-center gap-3 px-4 py-3 rounded-lg
+              text-slate-600 hover:bg-slate-200 transition-all">
+      <span class="material-symbols-outlined">palette</span>
+      <span>Cursos</span>
+    </a>
+  </nav>
+
+  <div class="px-4 mt-auto space-y-2">
+    <a href="nova-matricula.html"
+       class="flex items-center justify-center gap-2 w-full py-3
+              bg-primary text-white rounded-xl font-bold mb-4
+              hover:bg-primary-container transition-colors">
+      <span class="material-symbols-outlined text-sm">person_add</span>
+      Nova Matrícula
+    </a>
+    <button data-action="logout"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg w-full
+                   text-slate-600 hover:bg-slate-200 transition-all">
+      <span class="material-symbols-outlined">logout</span>
+      <span>Sair</span>
+    </button>
+  </div>
+</aside>
+
+<!-- Conteúdo Principal -->
+<main class="ml-64 min-h-screen">
+
+  <!-- Header -->
+  <header class="w-full h-16 sticky top-0 z-40 bg-white/70
+                 backdrop-blur-md shadow-sm flex items-center
+                 justify-between px-8">
+    <h2 class="text-xl font-bold text-blue-900 font-headline">
+      Alunos e Matrículas
+    </h2>
+    <div class="flex items-center gap-4">
+      <!-- Busca -->
+      <div class="relative">
+        <span class="material-symbols-outlined absolute left-3
+                     top-1/2 -translate-y-1/2 text-slate-400 text-lg">
+          search
+        </span>
+        <input id="campoBusca"
+               type="text"
+               placeholder="Buscar aluno..."
+               class="pl-10 pr-4 py-2 bg-slate-100 border-none
+                      rounded-full text-sm w-64 focus:ring-2
+                      focus:ring-secondary/20 outline-none"/>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="text-right">
+          <p class="text-sm font-bold text-blue-900 leading-none"
+             data-user="nome">...</p>
+          <p class="text-xs text-slate-500"
+             data-user="tipo">...</p>
+        </div>
+        <div class="w-9 h-9 rounded-full bg-primary flex items-center
+                    justify-center text-white font-bold text-sm"
+             data-user="avatar">?</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Conteúdo -->
+  <div class="p-10 space-y-8">
+
+    <!-- Título + Botão -->
+    <div class="flex items-end justify-between">
+      <div>
+        <h2 class="font-headline text-3xl font-extrabold text-primary mb-2">
+          Diretório de Alunos
+        </h2>
+        <p class="text-on-surface-variant max-w-xl">
+          Gerencie matrículas, status e situação financeira dos alunos.
+        </p>
+      </div>
+      <a href="nova-matricula.html"
+         class="bg-primary text-white px-6 py-3 rounded-xl font-bold
+                flex items-center gap-2 hover:bg-primary-container
+                transition-all shadow-lg">
+        <span class="material-symbols-outlined">person_add</span>
+        Novo Aluno
+      </a>
+    </div>
+
+    <!-- Tabela -->
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-100
+                overflow-hidden">
+
+      <!-- Filtros -->
+      <div class="px-8 py-5 flex items-center justify-between
+                  bg-surface-container-low/30 border-b border-slate-100">
+        <div class="flex items-center gap-3">
+          <select id="filtroStatus"
+                  class="px-4 py-2 bg-white rounded-lg border
+                         border-slate-200 text-sm text-slate-600
+                         focus:outline-none focus:ring-2
+                         focus:ring-primary/20">
+            <option value="">Todos os Status</option>
+            <option value="ativa">Ativa</option>
+            <option value="pendente">Pendente</option>
+            <option value="inativa">Inativa</option>
+          </select>
+          <select id="filtroCurso"
+                  class="px-4 py-2 bg-white rounded-lg border
+                         border-slate-200 text-sm text-slate-600
+                         focus:outline-none focus:ring-2
+                         focus:ring-primary/20">
+            <option value="">Todos os Cursos</option>
+          </select>
+        </div>
+        <p id="contadorAlunos"
+           class="text-sm text-slate-400 font-medium">
+          Carregando...
+        </p>
+      </div>
+
+      <!-- Tabela de Alunos -->
+      <div class="overflow-x-auto">
+        <table class="w-full text-left">
+          <thead>
+            <tr class="bg-surface text-slate-500 text-xs font-bold
+                       uppercase tracking-widest border-b border-slate-100">
+              <th class="px-8 py-4">Aluno</th>
+              <th class="px-6 py-4">Matrícula</th>
+              <th class="px-6 py-4">Curso</th>
+              <th class="px-6 py-4">Data</th>
+              <th class="px-6 py-4">Status</th>
+              <th class="px-6 py-4">Financeiro</th>
+              <th class="px-8 py-4 text-right">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tabelaAlunos" class="divide-y divide-slate-50">
+            <tr>
+              <td colspan="7"
+                  class="px-8 py-12 text-center text-slate-400 text-sm">
+                Carregando alunos...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Paginação -->
+      <div class="px-8 py-4 border-t border-slate-100 flex items-center
+                  justify-between">
+        <button id="btnAnterior"
+                onclick="mudarPagina(-1)"
+                class="flex items-center gap-2 text-sm font-bold
+                       text-slate-400 hover:text-primary transition-colors
+                       disabled:opacity-30">
+          <span class="material-symbols-outlined">arrow_back</span>
+          Anterior
+        </button>
+        <div id="infoPagina"
+             class="text-sm text-slate-500 font-medium">
+          Página 1
+        </div>
+        <button id="btnProximo"
+                onclick="mudarPagina(1)"
+                class="flex items-center gap-2 text-sm font-bold
+                       text-primary hover:text-secondary transition-colors">
+          Próximo
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script type="module">
+  import { createClient } from
+    'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+  const supabase = createClient(
+    'https://volxtgqwdrcqrrxcfpcv.supabase.co',
+    'sb_publishable_Ew_M-Hmi7qxXJUCnN2ZEuw_i_CJ1feQ'
+  )
+
+  // 🔒 Verificar sessão
+  const { data: { session } } = await supabase.auth.getSession()
+  if (!session) window.location.href = 'login.html'
+
+  // 👤 Perfil
+  const { data: perfil } = await supabase
+    .from('perfis').select('*')
+    .eq('id', session.user.id).single()
+
+  document.querySelector('[data-user="nome"]').textContent =
+    perfil?.nome || 'Admin'
+  document.querySelector('[data-user="tipo"]').textContent =
+    perfil?.tipo === 'admin' ? 'Diretor(a)' : perfil?.tipo || ''
+  document.querySelector('[data-user="avatar"]').textContent =
+    perfil?.nome?.charAt(0).toUpperCase() || 'A'
+
+  // 📚 Carregar cursos no filtro
+  const { data: cursos } = await supabase
+    .from('cursos').select('id, nome').eq('ativo', true)
+
+  const filtroCurso = document.getElementById('filtroCurso')
+  cursos?.forEach(c => {
+    const opt = document.createElement('option')
+    opt.value = c.id
+    opt.textContent = c.nome
+    filtroCurso.appendChild(opt)
+  })
+
+  // 📋 Variáveis de estado
+  let paginaAtual = 1
+  const porPagina = 10
+
+  // 🔄 Carregar alunos
+  async function carregarAlunos() {
+    const inicio = (paginaAtual - 1) * porPagina
+    const statusFiltro = document.getElementById('filtroStatus').value
+    const cursoFiltro  = document.getElementById('filtroCurso').value
+    const busca        = document.getElementById('campoBusca').value.trim()
+
+    let query = supabase
+      .from('perfis')
+      .select(`
+        id, nome, email, telefone, criado_em,
+        matriculas (
+          id, status, matricula_num, criado_em,
+          curso:cursos (id, nome)
+        )
+      `, { count: 'exact' })
+      .eq('tipo', 'aluno')
+      .order('nome')
+      .range(inicio, inicio + porPagina - 1)
+
+    if (busca) {
+      query = query.or(`nome.ilike.%${busca}%,email.ilike.%${busca}%`)
+    }
+
+    const { data: alunos, count, error } = await query
+    if (error) { console.error(error); return }
+
+    // Atualizar contador
+    document.getElementById('contadorAlunos').textContent =
+      `${count || 0} aluno(s) encontrado(s)`
+    document.getElementById('infoPagina').textContent =
+      `Página ${paginaAtual} de ${Math.ceil((count || 1) / porPagina)}`
+
+    // Filtrar por curso e status no cliente
+    let filtrados = alunos || []
+    if (statusFiltro || cursoFiltro) {
+      filtrados = filtrados.filter(a => {
+        const mats = a.matriculas || []
+        return mats.some(m => {
+          const okStatus = !statusFiltro || m.status === statusFiltro
+          const okCurso  = !cursoFiltro  || m.curso?.id === cursoFiltro
+          return okStatus && okCurso
+        })
+      })
+    }
+
+    // Renderizar tabela
+    const tbody = document.getElementById('tabelaAlunos')
+
+    if (filtrados.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="7"
+              class="px-8 py-12 text-center text-slate-400 text-sm">
+            Nenhum aluno encontrado.
+            <a href="nova-matricula.html"
+               class="text-primary font-bold hover:underline ml-1">
+              Cadastrar primeiro aluno
+            </a>
+          </td>
+        </tr>`
+      return
+    }
+
+    const statusCores = {
+      ativa:     'bg-green-100 text-green-700',
+      pendente:  'bg-amber-100 text-amber-700',
+      inativa:   'bg-slate-100 text-slate-500',
+      concluida: 'bg-blue-100 text-blue-700'
+    }
+
+    tbody.innerHTML = filtrados.map(aluno => {
+      const mat     = aluno.matriculas?.[0]
+      const status  = mat?.status || 'pendente'
+      const curso   = mat?.curso?.nome || '—'
+      const numMat  = mat?.matricula_num || '—'
+      const dataReg = mat?.criado_em
+        ? new Date(mat.criado_em).toLocaleDateString('pt-BR')
+        : '—'
+
+      return `
+        <tr class="hover:bg-slate-50/50 transition-colors">
+          <td class="px-8 py-5">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-primary/10 flex
+                          items-center justify-center text-primary
+                          font-bold text-sm">
+                ${aluno.nome?.charAt(0).toUpperCase() || '?'}
+              </div>
+              <div>
+                <p class="font-bold text-primary">${aluno.nome}</p>
+                <p class="text-xs text-slate-400">${aluno.email}</p>
+              </div>
+            </div>
+          </td>
+          <td class="px-6 py-5 text-sm font-medium text-slate-500">
+            ${numMat}
+          </td>
+          <td class="px-6 py-5">
+            <span class="bg-secondary-fixed text-on-secondary-fixed-variant
+                         px-3 py-1 rounded-full text-xs font-bold">
+              ${curso}
+            </span>
+          </td>
+          <td class="px-6 py-5 text-sm text-slate-500">${dataReg}</td>
+          <td class="px-6 py-5">
+            <span class="inline-flex items-center gap-1 px-3 py-1
+                         rounded-full text-xs font-bold
+                         ${statusCores[status] || 'bg-slate-100 text-slate-500'}">
+              <span class="w-1.5 h-1.5 rounded-full bg-current"></span>
+              ${status.charAt(0).toUpperCase() + status.slice(1)}
+            </span>
+          </td>
+          <td class="px-6 py-5">
+            <span class="inline-flex items-center gap-1 text-slate-600
+                         text-xs font-bold bg-slate-100 px-3 py-1
+                         rounded-full">
+              <span class="material-symbols-outlined text-sm text-green-500"
+                    style="font-variation-settings:'FILL' 1">
+                check_circle
+              </span>
+              Em dia
+            </span>
+          </td>
+          <td class="px-8 py-5 text-right">
+            <div class="flex items-center justify-end gap-2">
+              <a href="financeiro.html"
+                 class="p-2 hover:bg-slate-200 rounded-lg text-slate-400
+                        hover:text-primary transition-all"
+                 title="Ver financeiro">
+                <span class="material-symbols-outlined text-lg">
+                  account_balance_wallet
+                </span>
+              </a>
+            </div>
+          </td>
+        </tr>`
+    }).join('')
+  }
+
+  // Paginação global
+  window.mudarPagina = function(direcao) {
+    paginaAtual += direcao
+    if (paginaAtual < 1) paginaAtual = 1
+    carregarAlunos()
+  }
+
+  // Eventos de filtro e busca
+  document.getElementById('filtroStatus')
+    .addEventListener('change', () => { paginaAtual = 1; carregarAlunos() })
+  document.getElementById('filtroCurso')
+    .addEventListener('change', () => { paginaAtual = 1; carregarAlunos() })
+
+  let timer
+  document.getElementById('campoBusca')
+    .addEventListener('input', () => {
+      clearTimeout(timer)
+      timer = setTimeout(() => { paginaAtual = 1; carregarAlunos() }, 400)
+    })
+
+  // 🚪 Logout
+  document.querySelector('[data-action="logout"]')
+    ?.addEventListener('click', async () => {
+      await supabase.auth.signOut()
+      window.location.href = 'login.html'
+    })
+
+  // Inicializar
+  carregarAlunos()
+</script>
+
+</body>
+</html>

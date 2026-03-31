@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Capadócia Academy — Nova Matrícula</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#003358",
+            "primary-fixed": "#d0e4ff",
+            "primary-container": "#004a7c",
+            "on-primary": "#ffffff",
+            "on-primary-fixed": "#001d35",
+            "on-primary-fixed-variant": "#00497b",
+            "secondary": "#006492",
+            "secondary-fixed": "#cae6ff",
+            "on-secondary": "#ffffff",
+            "on-secondary-fixed": "#001e2f",
+            "on-secondary-fixed-variant": "#004b6f",
+            "tertiary": "#432d16",
+            "tertiary-fixed": "#ffdcbe",
+            "tertiary-container": "#5b432b",
+            "on-tertiary": "#ffffff",
+            "on-tertiary-fixed": "#2a1704",
+            "on-tertiary-fixed-variant": "#5a422a",
+            "surface": "#f8f9fa",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#f3f4f5",
+            "surface-container": "#edeeef",
+            "surface-container-high": "#e7e8e9",
+            "surface-container-highest": "#e1e3e4",
+            "on-surface": "#191c1d",
+            "on-surface-variant": "#42474f",
+            "outline": "#727780",
+            "outline-variant": "#c1c7d0",
+            "error": "#ba1a1a",
+            "background": "#f8f9fa"
+          },
+          fontFamily: {
+            "headline": ["Epilogue", "sans-serif"],
+            "body": ["Manrope", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;
+    }
+    body { font-family: 'Manrope', sans-serif; }
+    h1, h2, h3 { font-family: 'Epilogue', sans-serif; }
+  </style>
+</head>
+<body class="bg-surface text-on-surface">
+
+<!-- Sidebar -->
+<aside class="h-screen w-64 fixed left-0 top-0 flex flex-col py-6
+              bg-slate-50 z-50">
+  <div class="px-6 mb-10 flex items-center gap-3">
+    <div class="w-10 h-10 rounded-xl bg-primary flex items-center
+                justify-center text-white">
+      <span class="material-symbols-outlined">palette</span>
+    </div>
+    <div>
+      <h1 class="font-headline font-bold text-blue-900 text-base leading-none">
+        Capadócia Academy
+      </h1>
+      <p class="text-xs text-slate-500 mt-1">Portal Admin</p>
+    </div>
+  </div>
+
+  <nav class="flex-1 px-4 space-y-2">
+    <a href="dashboard.html"
+       class="flex items-center gap-3 px-4 py-3 rounded-lg
+              text-slate-600 hover:bg-slate-200 transition-all">
+      <span class="material-symbols-outlined">dashboard</span>
+      <span>Dashboard</span>
+    </a>
+    <a href="alunos.html"
+       class="flex items-center gap-3 px-4 py-3 rounded-lg
+              text-slate-600 hover:bg-slate-200 transition-all">
+      <span class="material-symbols-outlined">group</span>
+      <span>Alunos</span>
+    </a>
+    <a href="financeiro.html"
+       class="flex items-center gap-3 px-4 py-3 rounded-lg
+              text-slate-600 hover:bg-slate-200 transition-all">
+      <span class="material-symbols-outlined">payments</span>
+      <span>Financeiro</span>
+    </a>
+    <a href="nova-matricula.html"
+       class="flex items-center gap-3 px-4 py-3 rounded-lg
+              text-blue-900 border-r-4 border-blue-900
+              bg-slate-200/50 transition-all">
+      <span class="material-symbols-outlined">palette</span>
+      <span>Cursos</span>
+    </a>
+  </nav>
+
+  <div class="px-4 mt-auto space-y-2">
+    <button data-action="logout"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg w-full
+                   text-slate-600 hover:bg-slate-200 transition-all">
+      <span class="material-symbols-outlined">logout</span>
+      <span>Sair</span>
+    </button>
+  </div>
+</aside>
+
+<!-- Conteúdo Principal -->
+<main class="ml-64 min-h-screen">
+
+  <!-- Header -->
+  <header class="w-full h-16 sticky top-0 z-40 bg-white/70
+                 backdrop-blur-md shadow-sm flex items-center
+                 justify-between px-8">
+    <div class="flex items-center gap-2 text-sm text-slate-500">
+      <a href="dashboard.html" class="hover:text-primary">Dashboard</a>
+      <span>/</span>
+      <a href="alunos.html" class="hover:text-primary">Alunos</a>
+      <span>/</span>
+      <span class="text-primary font-semibold">Nova Matrícula</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <p class="text-sm font-bold text-blue-900 leading-none"
+         data-user="nome">...</p>
+      <div class="w-9 h-9 rounded-full bg-primary flex items-center
+                  justify-center text-white font-bold text-sm"
+           data-user="avatar">?</div>
+    </div>
+  </header>
+
+  <!-- Conteúdo -->
+  <div class="p-10">
+
+    <!-- Título -->
+    <div class="mb-10">
+      <h1 class="text-3xl font-extrabold text-primary font-headline mb-2">
+        Nova Matrícula
+      </h1>
+      <p class="text-slate-500">
+        Preencha os dados abaixo para registrar um novo aluno.
+      </p>
+    </div>
+
+    <!-- Mensagem de sucesso -->
+    <div id="msgSucesso"
+         class="hidden mb-6 p-4 bg-green-50 border border-green-200
+                text-green-700 rounded-xl flex items-start gap-3">
+      <span class="material-symbols-outlined">check_circle</span>
+      <div>
+        <p class="font-bold">Matrícula criada com sucesso!</p>
+        <p id="textoSucesso" class="text-sm mt-1"></p>
+      </div>
+    </div>
+
+    <!-- Mensagem de erro -->
+    <div id="msgErro"
+         class="hidden mb-6 p-4 bg-red-50 border border-red-200
+                text-red-700 rounded-xl flex items-center gap-3">
+      <span class="material-symbols-outlined">error</span>
+      <span id="textoErro"></span>
+    </div>
+
+    <form id="formMatricula"
+          class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+      <!-- Coluna Esquerda -->
+      <div class="lg:col-span-8 space-y-8">
+
+        <!-- Dados Pessoais -->
+        <section class="bg-white p-8 rounded-xl shadow-sm
+                        border border-slate-100">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="material-symbols-outlined text-primary
+                         bg-primary-fixed p-2 rounded-lg">person</span>
+            <h2 class="text-lg font-bold text-primary font-headline">
+              Dados Pessoais
+            </h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <div class="space-y-1.5">
+              <label class="text-sm font-semibold text-slate-700">
+                Nome Completo *
+              </label>
+              <input id="nome" type="text"
+                     placeholder="Ex: Maria Silva"
+                     required
+                     class="w-full h-12 px-4 rounded-xl border
+                            border-slate-200 bg-slate-50
+                            focus:outline-none focus:ring-2
+                            focus:ring-primary/20 focus:border-primary
+                            transition-all text-sm"/>
+            </div>
+
+            <div class="space-y-1.5">
+              <label class="text-sm font-semibold text-slate-700">
+                E-mail *
+              </label>
+              <input id="email" type="email"
+                     placeholder="maria@exemplo.com"
+                     required
+                     class="w-full h-12 px-4 rounded-xl border
+                            border-slate-200 bg-slate-50
+                            focus:outline-none focus:ring-2
+                            focus:ring-primary/20 focus:border-primary
+                            transition-all text-sm"/>
+            </div>
+
+            <div class="space-y-1.5">
+              <label class="text-sm font-semibold text-slate-700">
+                Telefone
+              </label>
+              <input id="telefone" type="tel"
+                     placeholder="(11) 99999-9999"
+                     class="w-full h-12 px-4 rounded-xl border
+                            border-slate-200 bg-slate-50
+                            focus:outline-none focus:ring-2
+                            focus:ring-primary/20 focus:border-primary
+                            transition-all text-sm"/>
+            </div>
+
+            <div class="space-y-1.5">
+              <label class="text-sm font-semibold text-slate-700">
+                Data de Nascimento
+              </label>
+              <input id="nascimento" type="date"
+                     class="w-full h-12 px-4 rounded-xl border
+                            border-slate-200 bg-slate-50
+                            focus:outline-none focus:ring-2
+                            focus:ring-primary/20 focus:border-primary
+                            transition-all text-sm"/>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Seleção de Curso -->
+        <section class="bg-white p-8 rounded-xl shadow-sm
+                        border border-slate-100">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="material-symbols-outlined text-primary
+                         bg-primary-fixed p-2 rounded-lg">palette</span>
+            <h2 class="text-lg font-bold text-primary font-headline">
+              Escolha o Curso
+            </h2>
+          </div>
+          <p class="text-sm text-slate-500 mb-6">
+            Selecione um ou mais cursos para o aluno.
+          </p>
+          <!-- Cursos carregados dinamicamente -->
+          <div id="gridCursos"
+               class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            <div class="col-span-3 text-center text-slate-400 text-sm py-4">
+              Carregando cursos...
+            </div>
+          </div>
+        </section>
+
+        <!-- Plano Financeiro -->
+        <section class="bg-white p-8 rounded-xl shadow-sm
+                        border border-slate-100">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="material-symbols-outlined text-primary
+                         bg-primary-fixed p-2 rounded-lg">payments</span>
+            <h2 class="text-lg font-bold text-primary font-headline">
+              Plano de Pagamento
+            </h2>
+          </div>
+          <div class="space-y-4">
+
+            <label class="flex items-center p-5 rounded-xl border-2
+                          border-transparent bg-slate-50 cursor-pointer
+                          hover:bg-slate-100 transition-all
+                          has-[:checked]:border-primary
+                          has-[:checked]:bg-white">
+              <input type="radio" name="plano"
+                     value="trimestral" class="w-5 h-5 text-primary"/>
+              <div class="ml-4 flex-1">
+                <div class="flex justify-between items-center">
+                  <span class="font-bold text-primary">
+                    Plano Trimestral
+                  </span>
+                  <span class="font-extrabold text-secondary">
+                    R$ 450/mês
+                  </span>
+                </div>
+                <p class="text-sm text-slate-500 mt-1">
+                  Acesso a 2 oficinas por semana + material básico incluso.
+                </p>
+              </div>
+            </label>
+
+            <label class="flex items-center p-5 rounded-xl border-2
+                          border-primary bg-white cursor-pointer
+                          hover:bg-slate-50 transition-all
+                          has-[:checked]:border-primary
+                          has-[:checked]:bg-white">
+              <input type="radio" name="plano"
+                     value="anual" checked class="w-5 h-5 text-primary"/>
+              <div class="ml-4 flex-1">
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-2">
+                    <span class="font-bold text-primary">
+                      Plano Anual
+                    </span>
+                    <span class="bg-secondary-fixed
+                                 text-on-secondary-fixed-variant
+                                 text-xs px-2 py-0.5 rounded-full
+                                 font-bold">
+                      Mais Popular
+                    </span>
+                  </div>
+                  <span class="font-extrabold text-secondary">
+                    R$ 380/mês
+                  </span>
+                </div>
+                <p class="text-sm text-slate-500 mt-1">
+                  Acesso ilimitado + mentoria mensal + galeria virtual.
+                </p>
+              </div>
+            </label>
+
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Coluna Direita — Resumo -->
+      <aside class="lg:col-span-4 sticky top-24 space-y-6">
+
+        <div class="bg-primary rounded-2xl overflow-hidden shadow-xl
+                    text-white">
+          <div class="p-6 border-b border-white/10">
+            <h3 class="font-bold font-headline text-lg">
+              Resumo da Matrícula
+            </h3>
+            <p class="text-white/60 text-sm mt-1">
+              Confira os dados antes de confirmar
+            </p>
+          </div>
+
+          <div class="p-6 space-y-4">
+            <div class="flex justify-between text-sm">
+              <span class="opacity-70">Taxa de Matrícula</span>
+              <span class="font-bold">R$ 150,00</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="opacity-70">Plano Selecionado</span>
+              <span id="resumoPlano" class="font-bold">Anual</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="opacity-70">Mensalidade</span>
+              <span id="resumoMensalidade"
+                    class="font-bold">R$ 380,00</span>
+            </div>
+            <div class="pt-4 border-t border-white/10 flex justify-between">
+              <span class="font-bold">Total Inicial</span>
+              <span id="resumoTotal"
+                    class="text-2xl font-extrabold text-secondary-fixed">
+                R$ 530,00
+              </span>
+            </div>
+          </div>
+
+          <div class="p-6 space-y-3">
+            <button type="submit"
+                    id="btnConfirmar"
+                    class="w-full h-14 bg-white text-primary font-bold
+                           rounded-xl hover:bg-secondary-fixed
+                           transition-colors flex items-center
+                           justify-center gap-2">
+              <span class="material-symbols-outlined">check_circle</span>
+              Confirmar Matrícula
+            </button>
+            <a href="alunos.html"
+               class="w-full h-12 flex items-center justify-center
+                      gap-2 bg-transparent text-white/70 font-medium
+                      rounded-xl hover:text-white hover:bg-white/10
+                      transition-all border border-white/20 text-sm">
+              <span class="material-symbols-outlined text-sm">
+                arrow_back
+              </span>
+              Cancelar
+            </a>
+          </div>
+        </div>
+
+        <!-- Dica -->
+        <div class="bg-tertiary-fixed text-on-tertiary-fixed p-6
+                    rounded-2xl">
+          <div class="flex gap-3 items-start">
+            <span class="material-symbols-outlined
+                         text-on-tertiary-fixed-variant">info</span>
+            <div>
+              <h4 class="font-bold text-sm mb-1">Dica</h4>
+              <p class="text-xs leading-relaxed opacity-80">
+                O aluno receberá um e-mail automático com os dados
+                de acesso ao portal após a confirmação da matrícula.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+    </form>
+  </div>
+</main>
+
+<script type="module">
+  import { createClient } from
+    'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+  const supabase = createClient(
+    'https://volxtgqwdrcqrrxcfpcv.supabase.co',
+    'sb_publishable_Ew_M-Hmi7qxXJUCnN2ZEuw_i_CJ1feQ'
+  )
+
+  // 🔒 Verificar sessão
+  const { data: { session } } = await supabase.auth.getSession()
+  if (!session) window.location.href = 'login.html'
+
+  // 👤 Perfil
+  const { data: perfil } = await supabase
+    .from('perfis').select('*')
+    .eq('id', session.user.id).single()
+
+  document.querySelector('[data-user="nome"]').textContent =
+    perfil?.nome || 'Admin'
+  document.querySelector('[data-user="avatar"]').textContent =
+    perfil?.nome?.charAt(0).toUpperCase() || 'A'
+
+  // 📚 Carregar cursos dinamicamente
+  const { data: cursos } = await supabase
+    .from('cursos').select('*').eq('ativo', true)
+
+  const iconesCores = {
+    brush:        'bg-primary-fixed/50 text-primary',
+    architecture: 'bg-secondary-fixed/50 text-secondary',
+    draw:         'bg-tertiary-fixed/50 text-tertiary',
+    photo_camera: 'bg-slate-200 text-slate-600',
+    devices:      'bg-blue-100 text-blue-700',
+    water_drop:   'bg-cyan-100 text-cyan-700'
+  }
+
+  const gridCursos = document.getElementById('gridCursos')
+  if (cursos && cursos.length > 0) {
+    gridCursos.innerHTML = cursos.map(c => `
+      <label class="cursor-pointer">
+        <input type="checkbox" value="${c.id}"
+               name="cursos" class="sr-only peer"/>
+        <div class="flex flex-col items-center justify-center p-4
+                    rounded-xl border-2 border-transparent
+                    ${iconesCores[c.icone] || 'bg-slate-100 text-slate-600'}
+                    peer-checked:border-primary peer-checked:bg-primary-fixed
+                    transition-all duration-200 text-center">
+          <span class="material-symbols-outlined mb-2 text-2xl">
+            ${c.icone || 'palette'}
+          </span>
+          <span class="text-xs font-bold leading-tight">${c.nome}</span>
+          <span class="text-xs opacity-60 mt-1">
+            R$ ${Number(c.preco_mensal).toFixed(2).replace('.', ',')}
+          </span>
+        </div>
+      </label>
+    `).join('')
+  }
+
+  // 💰 Atualizar resumo ao mudar plano
+  const precos = { trimestral: 450, anual: 380, semestral: 410 }
+  document.querySelectorAll('input[name="plano"]')
+    .forEach(radio => {
+      radio.addEventListener('change', atualizarResumo)
+    })
+
+  function atualizarResumo() {
+    const plano = document.querySelector(
+      'input[name="plano"]:checked')?.value || 'anual'
+    const mensalidade = precos[plano] || 380
+    const total = mensalidade + 150
+
+    document.getElementById('resumoPlano').textContent =
+      plano.charAt(0).toUpperCase() + plano.slice(1)
+    document.getElementById('resumoMensalidade').textContent =
+      `R$ ${mensalidade.toFixed(2).replace('.', ',')}`
+    document.getElementById('resumoTotal').textContent =
+      `R$ ${total.toFixed(2).replace('.', ',')}`
+  }
+
+  // 📝 Submissão do formulário
+  document.getElementById('formMatricula')
+    .addEventListener('submit', async (e) => {
+      e.preventDefault()
+
+      const btn     = document.getElementById('btnConfirmar')
+      const msgErro = document.getElementById('msgErro')
+      const msgOk   = document.getElementById('msgSucesso')
+
+      msgErro.classList.add('hidden')
+      msgOk.classList.add('hidden')
+
+      // Validações
+      const nome  = document.getElementById('nome').value.trim()
+      const email = document.getElementById('email').value.trim()
+      const tel   = document.getElementById('telefone').value.trim()
+      const plano = document.querySelector(
+        'input[name="plano"]:checked')?.value || 'anual'
+
+      const cursosSelecionados = [
+        ...document.querySelectorAll('input[name="cursos"]:checked')
+      ].map(c => c.value)
+
+      if (!nome || !email) {
+        document.getElementById('textoErro').textContent =
+          'Nome e e-mail são obrigatórios.'
+        msgErro.classList.remove('hidden')
+        return
+      }
+
+      if (cursosSelecionados.length === 0) {
+        document.getElementById('textoErro').textContent =
+          'Selecione pelo menos um curso.'
+        msgErro.classList.remove('hidden')
+        return
+      }
+
+      // Estado carregando
+      btn.disabled  = true
+      btn.innerHTML = `
+        <span class="material-symbols-outlined animate-spin">
+          progress_activity
+        </span>
+        Processando...`
+
+      try {
+        // Criar conta do aluno
+        const senhaTemp =
+          Math.random().toString(36).slice(-8) + 'Aa1!'
+
+        const { data: authData, error: authErr } =
+          await supabase.auth.signUp({
+            email,
+            password: senhaTemp,
+            options: {
+              emailRedirectTo:
+                `${window.location.origin}/login.html`
+            }
+          })
+
+        if (authErr) throw new Error(authErr.message)
+        const userId = authData.user.id
+
+        // Criar perfil
+        await supabase.from('perfis').insert([{
+          id: userId, nome, email,
+          telefone: tel, tipo: 'aluno'
+        }])
+
+        // Criar matrículas
+        const { count } = await supabase
+          .from('matriculas')
+          .select('*', { count: 'exact', head: true })
+
+        for (let i = 0; i < cursosSelecionados.length; i++) {
+          const num = `CAP-${new Date().getFullYear()}-${
+            String((count || 0) + i + 1).padStart(3, '0')}`
+
+          const { data: cursoData } = await supabase
+            .from('cursos').select('preco_mensal')
+            .eq('id', cursosSelecionados[i]).single()
+
+          const { data: mat } = await supabase
+            .from('matriculas')
+            .insert([{
+              aluno_id:          userId,
+              curso_id:          cursosSelecionados[i],
+              plano,
+              matricula_num:     num,
+              status:            'ativa',
+              valor_mensalidade: cursoData?.preco_mensal
+            }]).select()
+
+          // Registrar taxa
+          await supabase.from('transacoes').insert([{
+            aluno_id:        userId,
+            matricula_id:    mat[0].id,
+            descricao:       `Taxa de matrícula — ${num}`,
+            valor:           150.00,
+            tipo:            'entrada',
+            categoria:       'matricula',
+            status:          'pendente',
+            data_vencimento: new Date().toISOString().split('T')[0]
+          }])
+        }
+
+        // Sucesso!
+        document.getElementById('textoSucesso').textContent =
+          `Aluno "${nome}" cadastrado! Senha temporária: ${senhaTemp}
+           — Guarde e envie ao aluno.`
+        msgOk.classList.remove('hidden')
+
+        // Limpar formulário
+        document.getElementById('formMatricula').reset()
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+
+      } catch (err) {
+        document.getElementById('textoErro').textContent =
+          'Erro: ' + (err.message || 'Tente novamente.')
+        msgErro.classList.remove('hidden')
+      } finally {
+        btn.disabled  = false
+        btn.innerHTML = `
+          <span class="material-symbols-outlined">check_circle</span>
+          Confirmar Matrícula`
+      }
+    })
+
+  // 🚪 Logout
+  document.querySelector('[data-action="logout"]')
+    ?.addEventListener('click', async () => {
+      await supabase.auth.signOut()
+      window.location.href = 'login.html'
+    })
+</script>
+
+</body>
+</html>

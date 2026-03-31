@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Capadócia Academy — Login</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <style>
+    body { font-family: 'Manrope', sans-serif; }
+    h1, h2 { font-family: 'Epilogue', sans-serif; }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-50 flex items-center justify-center p-4">
+
+  <div class="w-full max-w-md">
+
+    <!-- Logo -->
+    <div class="text-center mb-10">
+      <div class="w-20 h-20 bg-blue-900 rounded-3xl flex items-center
+                  justify-center mx-auto mb-4 shadow-xl">
+        <span class="material-symbols-outlined text-white"
+              style="font-size:40px">palette</span>
+      </div>
+      <h1 class="text-3xl font-extrabold text-blue-900">
+        Capadócia Academy
+      </h1>
+      <p class="text-slate-500 mt-1 text-sm">
+        Sistema de Gestão de Matrículas
+      </p>
+    </div>
+
+    <!-- Card de Login -->
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
+      <h2 class="text-xl font-bold text-blue-900 mb-6">
+        Entrar no sistema
+      </h2>
+
+      <!-- Mensagem de erro -->
+      <div id="msgErro"
+           class="hidden mb-4 p-3 bg-red-50 border border-red-200
+                  text-red-700 rounded-lg text-sm flex items-center gap-2">
+        <span class="material-symbols-outlined text-base">error</span>
+        <span id="textoErro"></span>
+      </div>
+
+      <form id="formLogin" class="space-y-5">
+
+        <div>
+          <label class="block text-sm font-semibold text-slate-700 mb-1.5">
+            E-mail
+          </label>
+          <input id="inputEmail"
+                 type="email"
+                 placeholder="seu@email.com.br"
+                 required
+                 class="w-full h-12 px-4 rounded-xl border border-slate-200
+                        bg-slate-50 focus:outline-none focus:ring-2
+                        focus:ring-blue-900/20 focus:border-blue-900
+                        transition-all text-sm"/>
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-slate-700 mb-1.5">
+            Senha
+          </label>
+          <input id="inputSenha"
+                 type="password"
+                 placeholder="••••••••"
+                 required
+                 class="w-full h-12 px-4 rounded-xl border border-slate-200
+                        bg-slate-50 focus:outline-none focus:ring-2
+                        focus:ring-blue-900/20 focus:border-blue-900
+                        transition-all text-sm"/>
+        </div>
+
+        <button id="btnEntrar"
+                type="submit"
+                class="w-full h-12 bg-blue-900 text-white font-bold
+                       rounded-xl hover:bg-blue-800 active:scale-95
+                       transition-all flex items-center justify-center
+                       gap-2 text-sm shadow-lg shadow-blue-900/20">
+          <span class="material-symbols-outlined text-base">login</span>
+          Entrar
+        </button>
+
+      </form>
+
+      <p class="text-center text-xs text-slate-400 mt-6">
+        Esqueceu a senha? Fale com o administrador.
+      </p>
+    </div>
+
+    <!-- Rodapé -->
+    <p class="text-center text-xs text-slate-400 mt-6">
+      © 2026 Capadócia Academy — Todos os direitos reservados.
+    </p>
+
+  </div>
+
+  <script type="module">
+    import { createClient } from
+      'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+    // 🔑 Suas credenciais
+    const supabase = createClient(
+      'https://volxtgqwdrcqrrxcfpcv.supabase.co',
+      'sb_publishable_Ew_M-Hmi7qxXJUCnN2ZEuw_i_CJ1feQ'
+    )
+
+    // Se já estiver logado, redireciona direto
+    const { data: { session } } = await supabase.auth.getSession()
+    if (session) await irParaDashboard(session.user.id)
+
+    // Função de redirecionamento por tipo de usuário
+    async function irParaDashboard(userId) {
+      const { data: perfil } = await supabase
+        .from('perfis')
+        .select('tipo')
+        .eq('id', userId)
+        .single()
+
+      const destinos = {
+        admin:     'dashboard.html',
+        professor: 'alunos.html',
+        aluno:     'aluno-portal.html'
+      }
+      window.location.href = destinos[perfil?.tipo] || 'login.html'
+    }
+
+    // Submissão do formulário
+    document.getElementById('formLogin')
+      .addEventListener('submit', async (e) => {
+        e.preventDefault()
+
+        const btn     = document.getElementById('btnEntrar')
+        const msgErro = document.getElementById('msgErro')
+        const txtErro = document.getElementById('textoErro')
+
+        // Estado de carregando
+        btn.disabled  = true
+        btn.innerHTML = `
+          <span class="material-symbols-outlined text-base
+                       animate-spin">progress_activity</span>
+          Entrando...`
+        msgErro.classList.add('hidden')
+
+        try {
+          const email = document.getElementById('inputEmail').value.trim()
+          const senha = document.getElementById('inputSenha').value
+
+          const { data, error } = await supabase.auth.signInWithPassword({
+            email, password: senha
+          })
+          if (error) throw error
+
+          await irParaDashboard(data.user.id)
+
+        } catch (err) {
+          // Mostrar erro
+          txtErro.textContent = 'E-mail ou senha incorretos. Tente novamente.'
+          msgErro.classList.remove('hidden')
+          btn.disabled  = false
+          btn.innerHTML = `
+            <span class="material-symbols-outlined text-base">login</span>
+            Entrar`
+        }
+      })
+  </script>
+
+</body>
+</html>

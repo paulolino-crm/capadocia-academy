@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Capadócia Academy — Financeiro</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#003358",
+            "primary-fixed": "#d0e4ff",
+            "primary-container": "#004a7c",
+            "on-primary": "#ffffff",
+            "on-primary-fixed": "#001d35",
+            "on-primary-fixed-variant": "#00497b",
+            "secondary": "#006492",
+            "secondary-fixed": "#cae6ff",
+            "on-secondary": "#ffffff",
+            "on-secondary-fixed": "#001e2f",
+            "on-secondary-fixed-variant": "#004b6f",
+            "tertiary": "#432d16",
+            "tertiary-fixed": "#ffdcbe",
+            "on-tertiary": "#ffffff",
+            "on-tertiary-fixed": "#2a1704",
+            "on-tertiary-fixed-variant": "#5a422a",
+            "surface": "#f8f9fa",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#f3f4f5",
+            "surface-container": "#edeeef",
+            "surface-container-high": "#e7e8e9",
+            "surface-container-highest": "#e1e3e4",
+            "on-surface": "#191c1d",
+            "on-surface-variant": "#42474f",
+            "outline": "#727780",
+            "outline-variant": "#c1c7d0",
+            "error": "#ba1a1a",
+            "background": "#f8f9fa"
+          },
+          fontFamily: {
+            "headline": ["Epilogue", "sans-serif"],
+            "body": ["Manrope", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;
+      vertical-align: middle;
+    }
+    body { font-family: 'Manrope', sans-serif; }
+    h1, h2, h3 { font-family: 'Epilogue', sans-serif; }
+  </style>
+</head>
+<body class="bg-surface text-on-surface">
+
+<!-- Sidebar -->
+<aside class="h-screen w-64 fixed left-0 top-0 flex flex-col py-6
+              bg-slate-50 z-50">
+  <div class="px-6 mb-10 flex items-center gap-3">
+    <div class="w-10 h-10 rounded-xl bg-primary flex items-center
+                justify-center text-white">
+      <span class="material-symbols-outlined">palette</span>
+    </div>
+    <div>
+      <h1 class="font-headline font-bold text-blue-900 text-base leading-none">
+        Capadócia Academy
+      </h1>
+      <p class="text-xs text-slate-500 mt-1">Portal Admin</p>
+    </div>
+  </div>
+
+  <nav class="flex-1 px-4 space-y-2">
+    <a href="dashboard.html"
+       class="flex items-center gap-3 px-4 py-3 rounded-lg
+              text-slate-600 hover:bg-slate-200 transition-all">
+      <span class="material-symbols-outlined">dashboard</span>
+      <span>Dashboard</span>
+    </a>
+    <a href="alunos.html"
+       class="flex items-center gap-3 px-4 py-3 rounded-lg
+              text-slate-600 hover:bg-slate-200 transition-all">
+      <span class="material-symbols-outlined">group</span>
+      <span>Alunos</span>
+    </a>
+    <a href="financeiro.html"
+       class="flex items-center gap-3 px-4 py-3 rounded-lg
+              text-blue-900 border-r-4 border-blue-900
+              bg-slate-200/50 transition-all">
+      <span class="material-symbols-outlined">payments</span>
+      <span>Financeiro</span>
+    </a>
+    <a href="nova-matricula.html"
+       class="flex items-center gap-3 px-4 py-3 rounded-lg
+              text-slate-600 hover:bg-slate-200 transition-all">
+      <span class="material-symbols-outlined">palette</span>
+      <span>Cursos</span>
+    </a>
+  </nav>
+
+  <div class="px-4 mt-auto space-y-2">
+    <a href="nova-matricula.html"
+       class="flex items-center justify-center gap-2 w-full py-3
+              bg-primary text-white rounded-xl font-bold mb-4
+              hover:bg-primary-container transition-colors">
+      <span class="material-symbols-outlined text-sm">person_add</span>
+      Nova Matrícula
+    </a>
+    <button data-action="logout"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg w-full
+                   text-slate-600 hover:bg-slate-200 transition-all">
+      <span class="material-symbols-outlined">logout</span>
+      <span>Sair</span>
+    </button>
+  </div>
+</aside>
+
+<!-- Conteúdo Principal -->
+<main class="ml-64 min-h-screen">
+
+  <!-- Header -->
+  <header class="w-full h-16 sticky top-0 z-40 bg-white/70
+                 backdrop-blur-md shadow-sm flex items-center
+                 justify-between px-8">
+    <h2 class="text-xl font-bold text-blue-900 font-headline">
+      Gestão Financeira
+    </h2>
+    <div class="flex items-center gap-3">
+      <p class="text-sm font-bold text-blue-900 leading-none"
+         data-user="nome">...</p>
+      <div class="w-9 h-9 rounded-full bg-primary flex items-center
+                  justify-center text-white font-bold text-sm"
+           data-user="avatar">?</div>
+    </div>
+  </header>
+
+  <!-- Conteúdo -->
+  <div class="p-10 space-y-8">
+
+    <!-- Título -->
+    <div class="flex items-end justify-between">
+      <div>
+        <h1 class="text-3xl font-extrabold text-primary font-headline mb-2">
+          Financeiro
+        </h1>
+        <p class="text-slate-500">
+          Controle de receitas, despesas e pagamentos pendentes.
+        </p>
+      </div>
+      <button id="btnNovoLancamento"
+              class="bg-primary text-white px-6 py-3 rounded-xl
+                     font-bold flex items-center gap-2
+                     hover:bg-primary-container transition-all shadow-lg">
+        <span class="material-symbols-outlined">add_card</span>
+        Novo Lançamento
+      </button>
+    </div>
+
+    <!-- Cards Resumo -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <div class="bg-green-50 border border-green-100 p-6
+                  rounded-xl shadow-sm">
+        <div class="flex justify-between items-start mb-4">
+          <span class="material-symbols-outlined text-green-600
+                       bg-green-100 p-2 rounded-lg">
+            trending_up
+          </span>
+          <span class="text-xs font-bold text-green-600
+                       bg-green-100 px-2 py-1 rounded-full">
+            Recebido
+          </span>
+        </div>
+        <p class="text-sm font-medium text-green-700 mb-1">
+          Total Recebido
+        </p>
+        <h3 class="text-3xl font-bold text-green-700"
+            data-metric="recebido">—</h3>
+      </div>
+
+      <div class="bg-amber-50 border border-amber-100 p-6
+                  rounded-xl shadow-sm">
+        <div class="flex justify-between items-start mb-4">
+          <span class="material-symbols-outlined text-amber-600
+                       bg-amber-100 p-2 rounded-lg">
+            pending_actions
+          </span>
+          <span class="text-xs font-bold text-amber-600
+                       bg-amber-100 px-2 py-1 rounded-full">
+            Atenção
+          </span>
+        </div>
+        <p class="text-sm font-medium text-amber-700 mb-1">
+          A Receber
+        </p>
+        <h3 class="text-3xl font-bold text-amber-700"
+            data-metric="pendente">—</h3>
+      </div>
+
+      <div class="bg-red-50 border border-red-100 p-6
+                  rounded-xl shadow-sm">
+        <div class="flex justify-between items-start mb-4">
+          <span class="material-symbols-outlined text-red-600
+                       bg-red-100 p-2 rounded-lg">
+            trending_down
+          </span>
+          <span class="text-xs font-bold text-red-600
+                       bg-red-100 px-2 py-1 rounded-full">
+            Saída
+          </span>
+        </div>
+        <p class="text-sm font-medium text-red-700 mb-1">
+          Total Despesas
+        </p>
+        <h3 class="text-3xl font-bold text-red-700"
+            data-metric="despesas">—</h3>
+      </div>
+
+    </div>
+
+    <!-- Tabela de Transações -->
+    <div class="bg-white rounded-2xl shadow-sm border
+                border-slate-100 overflow-hidden">
+
+      <!-- Filtros -->
+      <div class="px-8 py-5 flex flex-wrap items-center gap-4
+                  bg-surface-container-low/30
+                  border-b border-slate-100">
+        <select id="filtroStatus"
+                class="px-4 py-2 bg-white rounded-lg border
+                       border-slate-200 text-sm text-slate-600
+                       focus:outline-none focus:ring-2
+                       focus:ring-primary/20">
+          <option value="">Todos os Status</option>
+          <option value="pendente">Pendente</option>
+          <option value="recebido">Recebido</option>
+          <option value="atrasado">Atrasado</option>
+          <option value="reembolsado">Reembolsado</option>
+        </select>
+
+        <select id="filtroTipo"
+                class="px-4 py-2 bg-white rounded-lg border
+                       border-slate-200 text-sm text-slate-600
+                       focus:outline-none focus:ring-2
+                       focus:ring-primary/20">
+          <option value="">Todas as Categorias</option>
+          <option value="entrada">Entradas</option>
+          <option value="saida">Saídas</option>
+        </select>
+
+        <p id="contadorTransacoes"
+           class="ml-auto text-sm text-slate-400 font-medium">
+          Carregando...
+        </p>
+      </div>
+
+      <!-- Tabela -->
+      <div class="overflow-x-auto">
+        <table class="w-full text-left">
+          <thead>
+            <tr class="bg-surface text-slate-500 text-xs font-bold
+                       uppercase tracking-widest
+                       border-b border-slate-100">
+              <th class="px-8 py-4">Descrição</th>
+              <th class="px-6 py-4">Aluno</th>
+              <th class="px-6 py-4">Vencimento</th>
+              <th class="px-6 py-4">Valor</th>
+              <th class="px-6 py-4">Tipo</th>
+              <th class="px-6 py-4">Status</th>
+              <th class="px-8 py-4 text-right">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tabelaTransacoes"
+                 class="divide-y divide-slate-50">
+            <tr>
+              <td colspan="7"
+                  class="px-8 py-12 text-center
+                         text-slate-400 text-sm">
+                Carregando transações...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Paginação -->
+      <div class="px-8 py-4 border-t border-slate-100
+                  flex items-center justify-between">
+        <button onclick="mudarPagina(-1)"
+                class="flex items-center gap-2 text-sm font-bold
+                       text-slate-400 hover:text-primary
+                       transition-colors">
+          <span class="material-symbols-outlined">arrow_back</span>
+          Anterior
+        </button>
+        <div id="infoPagina"
+             class="text-sm text-slate-500 font-medium">
+          Página 1
+        </div>
+        <button onclick="mudarPagina(1)"
+                class="flex items-center gap-2 text-sm font-bold
+                       text-primary hover:text-secondary
+                       transition-colors">
+          Próximo
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Modal Novo Lançamento -->
+<div id="modalLancamento"
+     class="hidden fixed inset-0 bg-black/50 z-50
+            flex items-center justify-center p-4">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-8">
+
+    <div class="flex items-center justify-between mb-6">
+      <h3 class="text-xl font-bold text-primary font-headline">
+        Novo Lançamento
+      </h3>
+      <button id="fecharModal"
+              class="p-2 hover:bg-slate-100 rounded-lg
+                     text-slate-400 hover:text-slate-600">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+
+    <!-- Erro modal -->
+    <div id="modalErro"
+         class="hidden mb-4 p-3 bg-red-50 border border-red-200
+                text-red-700 rounded-lg text-sm flex items-center gap-2">
+      <span class="material-symbols-outlined text-base">error</span>
+      <span id="modalTextoErro"></span>
+    </div>
+
+    <form id="formLancamento" class="space-y-5">
+
+      <div class="space-y-1.5">
+        <label class="text-sm font-semibold text-slate-700">
+          Descrição *
+        </label>
+        <input id="lancDescricao" type="text"
+               placeholder="Ex: Mensalidade Janeiro 2026"
+               required
+               class="w-full h-12 px-4 rounded-xl border
+                      border-slate-200 bg-slate-50
+                      focus:outline-none focus:ring-2
+                      focus:ring-primary/20 focus:border-primary
+                      transition-all text-sm"/>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div class="space-y-1.5">
+          <label class="text-sm font-semibold text-slate-700">
+            Valor (R$) *
+          </label>
+          <input id="lancValor" type="number"
+                 placeholder="0,00" step="0.01" min="0"
+                 required
+                 class="w-full h-12 px-4 rounded-xl border
+                        border-slate-200 bg-slate-50
+                        focus:outline-none focus:ring-2
+                        focus:ring-primary/20 focus:border-primary
+                        transition-all text-sm"/>
+        </div>
+        <div class="space-y-1.5">
+          <label class="text-sm font-semibold text-slate-700">
+            Tipo *
+          </label>
+          <select id="lancTipo"
+                  class="w-full h-12 px-4 rounded-xl border
+                         border-slate-200 bg-slate-50
+                         focus:outline-none focus:ring-2
+                         focus:ring-primary/20 focus:border-primary
+                         transition-all text-sm">
+            <option value="entrada">Entrada</option>
+            <option value="saida">Saída</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div class="space-y-1.5">
+          <label class="text-sm font-semibold text-slate-700">
+            Categoria
+          </label>
+          <select id="lancCategoria"
+                  class="w-full h-12 px-4 rounded-xl border
+                         border-slate-200 bg-slate-50
+                         focus:outline-none focus:ring-2
+                         focus:ring-primary/20 focus:border-primary
+                         transition-all text-sm">
+            <option value="mensalidade">Mensalidade</option>
+            <option value="matricula">Matrícula</option>
+            <option value="material">Material</option>
+            <option value="evento">Evento</option>
+            <option value="despesa">Despesa</option>
+            <option value="outro">Outro</option>
+          </select>
+        </div>
+        <div class="space-y-1.5">
+          <label class="text-sm font-semibold text-slate-700">
+            Vencimento *
+          </label>
+          <input id="lancVencimento" type="date"
+                 required
+                 class="w-full h-12 px-4 rounded-xl border
+                        border-slate-200 bg-slate-50
+                        focus:outline-none focus:ring-2
+                        focus:ring-primary/20 focus:border-primary
+                        transition-all text-sm"/>
+        </div>
+      </div>
+
+      <div class="flex gap-3 pt-2">
+        <button type="button" id="cancelarLancamento"
+                class="flex-1 h-12 border border-slate-200
+                       rounded-xl text-slate-600 font-bold
+                       hover:bg-slate-50 transition-colors">
+          Cancelar
+        </button>
+        <button type="submit" id="btnSalvarLancamento"
+                class="flex-1 h-12 bg-primary text-white
+                       font-bold rounded-xl
+                       hover:bg-primary-container transition-colors
+                       flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined text-base">
+            save
+          </span>
+          Salvar
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<script type="module">
+  import { createClient } from
+    'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+  const supabase = createClient(
+    'https://volxtgqwdrcqrrxcfpcv.supabase.co',
+    'sb_publishable_Ew_M-Hmi7qxXJUCnN2ZEuw_i_CJ1feQ'
+  )
+
+  // 🔒 Verificar sessão
+  const { data: { session } } = await supabase.auth.getSession()
+  if (!session) window.location.href = 'login.html'
+
+  // 👤 Perfil
+  const { data: perfil } = await supabase
+    .from('perfis').select('*')
+    .eq('id', session.user.id).single()
+
+  document.querySelector('[data-user="nome"]').textContent =
+    perfil?.nome || 'Admin'
+  document.querySelector('[data-user="avatar"]').textContent =
+    perfil?.nome?.charAt(0).toUpperCase() || 'A'
+
+  // 💰 Carregar métricas
+  async function carregarMetricas() {
+    const [
+      { data: recebidos },
+      { data: pendentes },
+      { data: despesas }
+    ] = await Promise.all([
+      supabase.from('transacoes').select('valor')
+        .eq('tipo', 'entrada').eq('status', 'recebido'),
+      supabase.from('transacoes').select('valor')
+        .eq('tipo', 'entrada').eq('status', 'pendente'),
+      supabase.from('transacoes').select('valor')
+        .eq('tipo', 'saida')
+    ])
+
+    const fmt = v => new Intl.NumberFormat('pt-BR', {
+      style: 'currency', currency: 'BRL'
+    }).format(v?.reduce((a, t) => a + Number(t.valor), 0) || 0)
+
+    document.querySelector('[data-metric="recebido"]').textContent =
+      fmt(recebidos)
+    document.querySelector('[data-metric="pendente"]').textContent =
+      fmt(pendentes)
+    document.querySelector('[data-metric="despesas"]').textContent =
+      fmt(despesas)
+  }
+
+  // 📋 Estado de paginação
+  let paginaAtual = 1
+  const porPagina = 10
+
+  // 🔄 Carregar transações
+  async function carregarTransacoes() {
+    const inicio      = (paginaAtual - 1) * porPagina
+    const statusFiltro = document.getElementById('filtroStatus').value
+    const tipoFiltro   = document.getElementById('filtroTipo').value
+
+    let query = supabase
+      .from('transacoes')
+      .select(`
+        *,
+        aluno:perfis!aluno_id (nome)
+      `, { count: 'exact' })
+      .order('criado_em', { ascending: false })
+      .range(inicio, inicio + porPagina - 1)
+
+    if (statusFiltro) query = query.eq('status', statusFiltro)
+    if (tipoFiltro)   query = query.eq('tipo', tipoFiltro)
+
+    const { data, count, error } = await query
+    if (error) { console.error(error); return }
+
+    document.getElementById('contadorTransacoes').textContent =
+      `${count || 0} transação(ões)`
+    document.getElementById('infoPagina').textContent =
+      `Página ${paginaAtual} de ${Math.max(1,
+        Math.ceil((count || 1) / porPagina))}`
+
+    const tbody = document.getElementById('tabelaTransacoes')
+
+    if (!data || data.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="7"
+              class="px-8 py-12 text-center text-slate-400 text-sm">
+            Nenhuma transação encontrada.
+          </td>
+        </tr>`
+      return
+    }
+
+    const statusCores = {
+      recebido:    'bg-green-100 text-green-700',
+      pendente:    'bg-amber-100 text-amber-700',
+      atrasado:    'bg-red-100 text-red-700',
+      reembolsado: 'bg-slate-200 text-slate-600'
+    }
+
+    tbody.innerHTML = data.map(t => {
+      const venc = t.data_vencimento
+        ? new Date(t.data_vencimento + 'T00:00:00')
+            .toLocaleDateString('pt-BR')
+        : '—'
+      const valor = new Intl.NumberFormat('pt-BR', {
+        style: 'currency', currency: 'BRL'
+      }).format(Number(t.valor) || 0)
+
+      return `
+        <tr class="hover:bg-slate-50/50 transition-colors">
+          <td class="px-8 py-5">
+            <p class="font-bold text-primary text-sm">
+              ${t.descricao || '—'}
+            </p>
+            <p class="text-xs text-slate-400 mt-0.5">
+              ${t.categoria || '—'}
+            </p>
+          </td>
+          <td class="px-6 py-5 text-sm text-slate-600">
+            ${t.aluno?.nome || '—'}
+          </td>
+          <td class="px-6 py-5 text-sm text-slate-500">
+            ${venc}
+          </td>
+          <td class="px-6 py-5">
+            <span class="font-bold text-sm
+                         ${t.tipo === 'entrada'
+                           ? 'text-green-600'
+                           : 'text-red-600'}">
+              ${t.tipo === 'entrada' ? '+' : '-'} ${valor}
+            </span>
+          </td>
+          <td class="px-6 py-5">
+            <span class="px-3 py-1 rounded-full text-xs font-bold
+                         ${t.tipo === 'entrada'
+                           ? 'bg-green-50 text-green-700'
+                           : 'bg-red-50 text-red-700'}">
+              ${t.tipo === 'entrada' ? 'Entrada' : 'Saída'}
+            </span>
+          </td>
+          <td class="px-6 py-5">
+            <span class="px-3 py-1 rounded-full text-xs font-bold
+                         ${statusCores[t.status]
+                           || 'bg-slate-100 text-slate-500'}">
+              ${(t.status || '').charAt(0).toUpperCase()
+                + (t.status || '').slice(1)}
+            </span>
+          </td>
+          <td class="px-8 py-5 text-right">
+            ${t.status === 'pendente' ? `
+              <button onclick="confirmarPagamento('${t.id}')"
+                      class="flex items-center gap-1 px-3 py-1.5
+                             bg-green-50 text-green-700 rounded-lg
+                             text-xs font-bold hover:bg-green-100
+                             transition-colors ml-auto">
+                <span class="material-symbols-outlined text-sm">
+                  check_circle
+                </span>
+                Recebido
+              </button>` : `
+              <span class="text-slate-300 text-xs">—</span>`}
+          </td>
+        </tr>`
+    }).join('')
+  }
+
+  // ✅ Confirmar pagamento
+  window.confirmarPagamento = async function(id) {
+    const hoje = new Date().toISOString().split('T')[0]
+    const { error } = await supabase
+      .from('transacoes')
+      .update({ status: 'recebido', data_pagamento: hoje })
+      .eq('id', id)
+    if (!error) {
+      carregarMetricas()
+      carregarTransacoes()
+    }
+  }
+
+  // Paginação global
+  window.mudarPagina = function(dir) {
+    paginaAtual += dir
+    if (paginaAtual < 1) paginaAtual = 1
+    carregarTransacoes()
+  }
+
+  // Filtros
+  document.getElementById('filtroStatus')
+    .addEventListener('change', () => {
+      paginaAtual = 1; carregarTransacoes()
+    })
+  document.getElementById('filtroTipo')
+    .addEventListener('change', () => {
+      paginaAtual = 1; carregarTransacoes()
+    })
+
+  // 📝 Modal Novo Lançamento
+  const modal = document.getElementById('modalLancamento')
+
+  document.getElementById('btnNovoLancamento')
+    .addEventListener('click', () => {
+      modal.classList.remove('hidden')
+      // Preencher data de hoje
+      document.getElementById('lancVencimento').value =
+        new Date().toISOString().split('T')[0]
+    })
+
+  document.getElementById('fecharModal')
+    .addEventListener('click', () => {
+      modal.classList.add('hidden')
+    })
+
+  document.getElementById('cancelarLancamento')
+    .addEventListener('click', () => {
+      modal.classList.add('hidden')
+    })
+
+  // Fechar modal clicando fora
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) modal.classList.add('hidden')
+  })
+
+  // Salvar lançamento
+  document.getElementById('formLancamento')
+    .addEventListener('submit', async (e) => {
+      e.preventDefault()
+
+      const btn     = document.getElementById('btnSalvarLancamento')
+      const msgErro = document.getElementById('modalErro')
+      msgErro.classList.add('hidden')
+
+      const descricao   = document.getElementById('lancDescricao').value.trim()
+      const valor       = document.getElementById('lancValor').value
+      const tipo        = document.getElementById('lancTipo').value
+      const categoria   = document.getElementById('lancCategoria').value
+      const vencimento  = document.getElementById('lancVencimento').value
+
+      if (!descricao || !valor || !vencimento) {
+        document.getElementById('modalTextoErro').textContent =
+          'Preencha todos os campos obrigatórios.'
+        msgErro.classList.remove('hidden')
+        return
+      }
+
+      btn.disabled  = true
+      btn.innerHTML = `
+        <span class="material-symbols-outlined animate-spin">
+          progress_activity
+        </span>
+        Salvando...`
+
+      try {
+        const { error } = await supabase
+          .from('transacoes')
+          .insert([{
+            descricao,
+            valor:           Number(valor),
+            tipo,
+            categoria,
+            status:          'pendente',
+            data_vencimento: vencimento
+          }])
+
+        if (error) throw error
+
+        modal.classList.add('hidden')
+        document.getElementById('formLancamento').reset()
+        carregarMetricas()
+        carregarTransacoes()
+
+      } catch (err) {
+        document.getElementById('modalTextoErro').textContent =
+          'Erro ao salvar: ' + err.message
+        msgErro.classList.remove('hidden')
+      } finally {
+        btn.disabled  = false
+        btn.innerHTML = `
+          <span class="material-symbols-outlined text-base">save</span>
+          Salvar`
+      }
+    })
+
+  // 🚪 Logout
+  document.querySelector('[data-action="logout"]')
+    ?.addEventListener('click', async () => {
+      await supabase.auth.signOut()
+      window.location.href = 'login.html'
+    })
+
+  // Inicializar
+  carregarMetricas()
+  carregarTransacoes()
+</script>
+
+</body>
+</html>
