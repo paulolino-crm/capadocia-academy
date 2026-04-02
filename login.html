@@ -48,14 +48,13 @@
     </p>
   </div>
 
-  <script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+ <script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
-    // ✅ Credenciais corretas
-    const supabase = createClient(
-  'https://volxtgqwdrcqrrxcfpcv.supabase.co',
-  'sb_publishable_Ew_M-Hmi7qxXJUCnN2ZEuw_i_CJ1feQ'
-    )
+  const supabase = createClient(
+    'https://volxtgqwdrcqrrxcfpcv.supabase.co',
+    'sb_publishable_Ew_M-Hmi7qxXJUCnN2ZEuw_i_CJ1feQ'
+  )
 
     // ✅ Verificar se já está logado
     const { data: { session } } = await supabase.auth.getSession()
