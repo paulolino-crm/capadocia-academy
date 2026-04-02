@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Capadócia Academy — Login</title>
-  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
     body { font-family: 'Manrope', sans-serif; }
@@ -15,7 +15,6 @@
 
   <div class="w-full max-w-md">
     <div class="bg-white rounded-2xl shadow-lg p-8">
-
       <div class="text-center mb-8">
         <h1 class="text-2xl font-bold text-slate-800">Entrar no sistema</h1>
       </div>
@@ -48,36 +47,25 @@
     </p>
   </div>
 
- <script type="module">
-  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+  <script>
+    // ── Configuração Supabase ──────────────────────────────
+    const SUPABASE_URL = 'https://volxtgqwdrcqrrxcfpcv.supabase.co'
+    const SUPABASE_KEY = 'sb_publishable_Ew_M-Hmi7qxXJUCnN2ZEuw_i_CJ1feQ'
 
-  const supabase = createClient(
-    'https://volxtgqwdrcqrrxcfpcv.supabase.co',
-    'sb_publishable_Ew_M-Hmi7qxXJUCnN2ZEuw_i_CJ1feQ'
-  )
-
-    // ✅ Verificar se já está logado
-    const { data: { session } } = await supabase.auth.getSession()
-    if (session) await irParaDashboard(session.user.id)
-
-    // ✅ Função de redirecionamento por tipo
-    async function irParaDashboard(userId) {
-      const { data: perfil } = await supabase
-        .from('perfis')
-        .select('tipo')
-        .eq('id', userId)
-        .single()
-
-      const destinos = {
-        admin:     './dashboard/dashboard.html',
-        professor: './dashboard/alunos.html',
-        aluno:     './dashboard/aluno-portal.html'
-      }
-
-      window.location.href = destinos[perfil?.tipo] || 'login.html'
+    // ── Função auxiliar para chamadas à API ───────────────
+    async function supabaseFetch(path, options = {}) {
+      const res = await fetch(`${SUPABASE_URL}${path}`, {
+        ...options,
+        headers: {
+          'apikey': SUPABASE_KEY,
+          'Content-Type': 'application/json',
+          ...(options.headers || {})
+        }
+      })
+      return res.json()
     }
 
-    // ✅ Evento de login
+    // ── Login ─────────────────────────────────────────────
     document.getElementById('form-login').addEventListener('submit', async (e) => {
       e.preventDefault()
 
@@ -90,17 +78,53 @@
       btn.disabled    = true
       erro.classList.add('hidden')
 
-      const { data, error } = await supabase.auth.signInWithPassword({ email, password: senha })
+      try {
+        // Faz login
+        const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
+          method: 'POST',
+          headers: {
+            'apikey': SUPABASE_KEY,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email, password: senha })
+        })
 
-      if (error) {
+        const data = await res.json()
+
+        if (!res.ok || data.error) {
+          throw new Error(data.error_description || 'Erro ao fazer login')
+        }
+
+        // Salva token na sessão
+        localStorage.setItem('sb_token', data.access_token)
+        localStorage.setItem('sb_user_id', data.user.id)
+
+        // Busca tipo do perfil
+        const perfil = await supabaseFetch(
+          `/rest/v1/perfis?select=tipo&id=eq.${data.user.id}`,
+          {
+            headers: {
+              'Authorization': `Bearer ${data.access_token}`
+            }
+          }
+        )
+
+        const tipo = perfil[0]?.tipo
+
+        const destinos = {
+          admin:     './dashboard/dashboard.html',
+          professor: './dashboard/alunos.html',
+          aluno:     './dashboard/aluno-portal.html'
+        }
+
+        window.location.href = destinos[tipo] || 'login.html'
+
+      } catch (err) {
         erro.textContent = 'E-mail ou senha incorretos!'
         erro.classList.remove('hidden')
         btn.textContent = 'Entrar'
         btn.disabled    = false
-        return
       }
-
-      await irParaDashboard(data.user.id)
     })
   </script>
 
