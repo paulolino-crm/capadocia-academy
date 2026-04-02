@@ -48,24 +48,9 @@
   </div>
 
   <script>
-    // ── Configuração Supabase ──────────────────────────────
     const SUPABASE_URL = 'https://volxtgqwdrcqrrxcfpcv.supabase.co'
     const SUPABASE_KEY = 'sb_publishable_Ew_M-Hmi7qxXJUCnN2ZEuw_i_CJ1feQ'
 
-    // ── Função auxiliar para chamadas à API ───────────────
-    async function supabaseFetch(path, options = {}) {
-      const res = await fetch(`${SUPABASE_URL}${path}`, {
-        ...options,
-        headers: {
-          'apikey': SUPABASE_KEY,
-          'Content-Type': 'application/json',
-          ...(options.headers || {})
-        }
-      })
-      return res.json()
-    }
-
-    // ── Login ─────────────────────────────────────────────
     document.getElementById('form-login').addEventListener('submit', async (e) => {
       e.preventDefault()
 
@@ -79,54 +64,5 @@
       erro.classList.add('hidden')
 
       try {
-        // Faz login
-        const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
-          method: 'POST',
-          headers: {
-            'apikey': SUPABASE_KEY,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ email, password: senha })
-        })
+        // ── 1. Faz login ──────────────────────────────────
 
-        const data = await res.json()
-
-        if (!res.ok || data.error) {
-          throw new Error(data.error_description || 'Erro ao fazer login')
-        }
-
-        // Salva token na sessão
-        localStorage.setItem('sb_token', data.access_token)
-        localStorage.setItem('sb_user_id', data.user.id)
-
-        // Busca tipo do perfil
-        const perfil = await supabaseFetch(
-          `/rest/v1/perfis?select=tipo&id=eq.${data.user.id}`,
-          {
-            headers: {
-              'Authorization': `Bearer ${data.access_token}`
-            }
-          }
-        )
-
-        const tipo = perfil[0]?.tipo
-
-        const destinos = {
-          admin:     './dashboard/dashboard.html',
-          professor: './dashboard/alunos.html',
-          aluno:     './dashboard/aluno-portal.html'
-        }
-
-        window.location.href = destinos[tipo] || 'login.html'
-
-      } catch (err) {
-        erro.textContent = 'E-mail ou senha incorretos!'
-        erro.classList.remove('hidden')
-        btn.textContent = 'Entrar'
-        btn.disabled    = false
-      }
-    })
-  </script>
-
-</body>
-</html>
